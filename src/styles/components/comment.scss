@@ -1,0 +1,27 @@
+.comment-list {
+  margin-left: 20px;
+  padding-left: 15px;
+  border-left: 2px solid #e0e0e0;
+
+  .comment-item {
+    margin-bottom: 15px;
+
+    .comment-body {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .comment-created-at {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .reply-form {
+      margin-top: 10px;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { usePosts, Post } from "../hooks/usePosts";
 import PostForm from "../components/Forms/PostForm";
 import PostCard from "../components/PostCard";
 import Loading from "../components/Loading";
+import "../styles/globals.scss";
 
 const CommunityPage: React.FC = () => {
   const {

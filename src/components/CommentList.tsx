@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { Comment } from "../hooks/usePosts";
 import CommentForm from "./Forms/CommentForm";
+import "../styles/components/comment.scss";
 
 interface CommentListProps {
   comments: Comment[];
@@ -10,17 +11,20 @@ interface CommentListProps {
 
 const CommentList: React.FC<CommentListProps> = ({ comments, onAddReply }) => {
   return (
-    <Box marginLeft={4}>
+    <div className="comment-list">
       {comments.map((comment) => (
-        <Box key={comment.id} marginBottom={2}>
-          <Typography variant="body1">{comment.body}</Typography>
+        <Box key={comment.id} className="comment-item">
+          <Typography className="comment-body">{comment.body}</Typography>
+          <Typography variant="caption" className="comment-created-at">
+            {new Date(comment.created_at).toLocaleString()}
+          </Typography>
           <CommentForm onSubmit={(body) => onAddReply(body, comment.id)} />
           {comment.replies.length > 0 && (
             <CommentList comments={comment.replies} onAddReply={onAddReply} />
           )}
         </Box>
       ))}
-    </Box>
+    </div>
   );
 };
 

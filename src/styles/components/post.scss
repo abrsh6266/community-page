@@ -1,0 +1,42 @@
+.post-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .post-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .post-body {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .post-created-at {
+    font-size: 0.85rem;
+    color: #888;
+  }
+
+  .divider {
+    margin: 15px 0;
+  }
+
+  .comments-section {
+    .comments-header {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+  }
+}

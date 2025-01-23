@@ -1,8 +1,9 @@
 import React from "react";
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Typography, Box, Divider } from "@mui/material";
 import { Post } from "../hooks/usePosts";
 import CommentList from "./CommentList";
 import CommentForm from "./Forms/CommentForm";
+import "../styles/components/post.scss";
 
 interface PostCardProps {
   post: Post;
@@ -19,20 +20,27 @@ const PostCard: React.FC<PostCardProps> = ({ post, onAddComment }) => {
   };
 
   return (
-    <Card variant="outlined" style={{ marginBottom: "16px" }}>
-      <CardContent>
-        <Typography variant="h5">{post.title}</Typography>
-        <Typography variant="body1" color="textSecondary">
-          {post.body}
-        </Typography>
+    <Box className="post-card">
+      <Typography variant="h5" className="post-title">
+        {post.title}
+      </Typography>
+      <Typography variant="body1" className="post-body">
+        {post.body}
+      </Typography>
+      <Typography variant="caption" className="post-created-at">
+        Posted on: {new Date(post.created_at).toLocaleString()}
+      </Typography>
 
-        {/* Comments */}
-        <Box marginTop={2}>
-          <CommentList comments={post.comments} onAddReply={handleAddComment} />
-          <CommentForm onSubmit={handleAddComment} />
-        </Box>
-      </CardContent>
-    </Card>
+      <Divider className="divider" />
+
+      <div className="comments-section">
+        <Typography variant="h6" className="comments-header">
+          Comments
+        </Typography>
+        <CommentList comments={post.comments} onAddReply={handleAddComment} />
+        <CommentForm onSubmit={handleAddComment} />
+      </div>
+    </Box>
   );
 };
 
