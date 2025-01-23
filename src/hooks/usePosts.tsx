@@ -4,12 +4,14 @@ import mockPosts from "../mock/posts.json";
 export interface Reply {
   id: number;
   body: string;
+  created_at: string;
   replies: Reply[];
 }
 
 export interface Comment {
   id: number;
   body: string;
+  created_at: string;
   replies: Reply[];
 }
 
@@ -17,6 +19,7 @@ export interface Post {
   id: number;
   title: string;
   body: string;
+  created_at: string;
   comments: Comment[];
 }
 
@@ -35,7 +38,20 @@ export const usePosts = () => {
         setLoading(true);
         setError(null);
         await new Promise((res) => setTimeout(res, 500));
-        setPosts(mockPosts);
+        setPosts(
+          mockPosts.map((post) => ({
+            ...post,
+            created_at: new Date().toISOString(),
+            comments: post.comments.map((comment) => ({
+              ...comment,
+              created_at: new Date().toISOString(),
+              replies: comment.replies.map((reply) => ({
+                ...reply,
+                created_at: new Date().toISOString(),
+              })),
+            })),
+          }))
+        );
         setTotalPosts(mockPosts.length);
       } catch {
         setError("Failed to load posts.");
@@ -61,7 +77,15 @@ export const usePosts = () => {
       if (comment.id === commentId) {
         return {
           ...comment,
-          replies: [...comment.replies, { id: Date.now(), body, replies: [] }],
+          replies: [
+            ...comment.replies,
+            {
+              id: Date.now(),
+              body,
+              created_at: new Date().toISOString(),
+              replies: [],
+            },
+          ],
         };
       }
       return {
@@ -77,6 +101,7 @@ export const usePosts = () => {
         id: posts.length + 1,
         title,
         body,
+        created_at: new Date().toISOString(),
         comments: [],
       };
       const updatedPosts = [...posts, newPost];
@@ -106,7 +131,12 @@ export const usePosts = () => {
               ...post,
               comments: [
                 ...post.comments,
-                { id: Date.now(), body, replies: [] },
+                {
+                  id: Date.now(),
+                  body,
+                  created_at: new Date().toISOString(),
+                  replies: [],
+                },
               ],
             };
           }
