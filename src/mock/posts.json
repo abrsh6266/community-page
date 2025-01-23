@@ -1,19 +1,127 @@
 [
   {
     "id": 1,
-    "title": "First Post",
-    "body": "This is the body of the first post.",
+    "title": "Welcome to the Community!",
+    "body": "This is the first post. Feel free to engage and share your thoughts.",
+    "created_at": "2025-01-20T10:00:00.000Z",
     "comments": [
       {
         "id": 1,
-        "body": "This is a comment on the first post.",
+        "body": "Great to be here!",
+        "created_at": "2025-01-20T10:05:00.000Z",
         "replies": [
           {
             "id": 2,
-            "body": "This is a nested reply to the first comment.",
+            "body": "Same here! Looking forward to great discussions.",
+            "created_at": "2025-01-20T10:10:00.000Z",
             "replies": []
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "React vs Angular vs Vue",
+    "body": "Which framework do you prefer for frontend development and why?",
+    "created_at": "2025-01-20T11:00:00.000Z",
+    "comments": [
+      {
+        "id": 3,
+        "body": "I prefer React for its ecosystem and community support.",
+        "created_at": "2025-01-20T11:15:00.000Z",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Best Practices in TypeScript",
+    "body": "What are your favorite tips for writing clean and maintainable TypeScript code?",
+    "created_at": "2025-01-21T09:00:00.000Z",
+    "comments": []
+  },
+  {
+    "id": 4,
+    "title": "CSS Modules or Styled Components?",
+    "body": "Which do you find more effective for styling React applications?",
+    "created_at": "2025-01-21T09:30:00.000Z",
+    "comments": [
+      {
+        "id": 4,
+        "body": "CSS Modules are great for simple projects, but Styled Components shine in larger apps.",
+        "created_at": "2025-01-21T09:45:00.000Z",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Favorite Programming Resources",
+    "body": "Share your go-to resources for learning programming!",
+    "created_at": "2025-01-21T10:00:00.000Z",
+    "comments": []
+  },
+  {
+    "id": 6,
+    "title": "The Rise of AI in Development",
+    "body": "How do you see AI impacting software development in the next 5 years?",
+    "created_at": "2025-01-21T11:00:00.000Z",
+    "comments": []
+  },
+  {
+    "id": 7,
+    "title": "Your Favorite Text Editor",
+    "body": "Are you a VS Code fan, or do you swear by another editor?",
+    "created_at": "2025-01-21T12:00:00.000Z",
+    "comments": [
+      {
+        "id": 5,
+        "body": "VS Code all the way! Love the extensions.",
+        "created_at": "2025-01-21T12:15:00.000Z",
+        "replies": [
+          {
+            "id": 6,
+            "body": "Agreed! The Prettier and ESLint extensions are lifesavers.",
+            "created_at": "2025-01-21T12:20:00.000Z",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "What's Your Favorite Algorithm?",
+    "body": "Which algorithm do you find fascinating, and why?",
+    "created_at": "2025-01-21T13:00:00.000Z",
+    "comments": []
+  },
+  {
+    "id": 9,
+    "title": "Debugging Tips",
+    "body": "What techniques or tools do you use to debug complex issues?",
+    "created_at": "2025-01-21T14:00:00.000Z",
+    "comments": [
+      {
+        "id": 7,
+        "body": "I find using breakpoints in Chrome DevTools incredibly helpful.",
+        "created_at": "2025-01-21T14:15:00.000Z",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Open Source Contributions",
+    "body": "Have you contributed to open source? Share your experience!",
+    "created_at": "2025-01-21T15:00:00.000Z",
+    "comments": [
+      {
+        "id": 8,
+        "body": "I contributed to a documentation update for React. Felt great!",
+        "created_at": "2025-01-21T15:15:00.000Z",
+        "replies": []
       }
     ]
   }
