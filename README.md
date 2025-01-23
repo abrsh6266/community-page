@@ -81,15 +81,14 @@ This is a Community Page project built with React, Vite, and TypeScript. The app
 - A form to create new posts with a title and body.
 - Basic validation for required fields.
 
+### Search Posts
+
+- search Posts by there title and body
+
 ### Commenting
 
 - Recursive rendering of comments and replies.
 - A form to add comments to posts or other comments.
-
-### UI Design
-
-- A clear and intuitive UI.
-- Responsive design with consistent styling.
 
 ## Architectural Considerations
 

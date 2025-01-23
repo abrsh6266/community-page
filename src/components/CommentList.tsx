@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { Comment } from "../hooks/usePosts";
 import CommentForm from "./Forms/CommentForm";
 import "../styles/components/comment.scss";
-import { getRelativeTime } from "../utilities/getRelativeTime";
+import { getRelativeTime } from "../utils/getRelativeTime";
 
 interface CommentListProps {
   comments: Comment[];
