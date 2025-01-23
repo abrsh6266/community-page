@@ -1,7 +1,8 @@
-// src/components/PostCard.tsx
 import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { Post } from "../hooks/usePosts";
+import CommentList from "./CommentList";
+import CommentForm from "./Forms/CommentForm";
 
 interface PostCardProps {
   post: Post;

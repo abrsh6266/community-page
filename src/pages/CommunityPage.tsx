@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Typography, Box, Button, Pagination } from "@mui/material";
 import { usePosts, Post } from "../hooks/usePosts";
+import PostForm from "../components/Forms/PostForm";
+import PostCard from "../components/PostCard";
 
 const CommunityPage: React.FC = () => {
   const {
