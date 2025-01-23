@@ -12,6 +12,7 @@ import PostForm from "../components/Forms/PostForm";
 import PostCard from "../components/PostCard";
 import Loading from "../components/Loading";
 import "../styles/globals.scss";
+import notify from "../components/notify";
 
 const CommunityPage: React.FC = () => {
   const {
@@ -31,6 +32,7 @@ const CommunityPage: React.FC = () => {
   const handleAddPost = (title: string, body: string) => {
     addPost(title, body);
     setIsModalOpen(false);
+    notify("Post created successfully!");
   };
 
   return (
@@ -45,7 +47,7 @@ const CommunityPage: React.FC = () => {
         </Typography>
       </Paper>
 
-      {/* Error/Loading State */}
+      {/* Error and Loading State */}
       {error && <Typography color="error">{error}</Typography>}
       {loading && <Loading />}
 
