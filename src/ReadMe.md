@@ -1,6 +1,6 @@
 # Community Page Project
 
-This is a Community Page project built with React, Vite, and TypeScript. The application allows users to create posts, add comments, and reply to comments in a nested structure. It is styled with SCSS and optionally uses a UI library like Material-UI or Chakra UI.
+This is a Community Page project built with React, Vite, and TypeScript. The application allows users to create posts, add comments, and reply to comments in a nested structure. It is styled with SCSS and uses a UI library like Material-UI, toastifies and others.
 
 ## Features
 
