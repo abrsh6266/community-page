@@ -52,15 +52,20 @@ const CommunityPage: React.FC = () => {
       {loading && <Loading />}
 
       {/* Post Form Button */}
-      <Box display="flex" justifyContent="end" marginY={3}>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => setIsModalOpen(true)}
-        >
-          Create New Post
-        </Button>
-      </Box>
+      <div>
+        <Typography variant="h6" align="center" gutterBottom>
+          Total Posts: {totalPosts}
+        </Typography>
+        <Box display="flex" justifyContent="end" marginY={3}>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Create New Post
+          </Button>
+        </Box>
+      </div>
 
       {/* Post Form Modal */}
       <PostForm

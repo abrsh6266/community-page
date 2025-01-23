@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import mockPosts from "../mock/posts.json";
+import notify from "../components/notify";
 
 export interface Reply {
   id: number;
@@ -31,6 +32,7 @@ export const usePosts = () => {
   const [paginatedPosts, setPaginatedPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -62,11 +64,21 @@ export const usePosts = () => {
     fetchPosts();
   }, []);
 
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery) return posts;
+    return posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.body.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [posts, searchQuery]);
+
   useEffect(() => {
     const startIndex = (currentPage - 1) * limit;
     const endIndex = startIndex + limit;
-    setPaginatedPosts(posts.slice(startIndex, endIndex));
-  }, [posts, currentPage, limit]);
+    setPaginatedPosts(filteredPosts.slice(startIndex, endIndex));
+    setTotalPosts(filteredPosts.length);
+  }, [filteredPosts, currentPage, limit]);
 
   const addReply = (
     comments: Comment[],
@@ -143,6 +155,7 @@ export const usePosts = () => {
           return post;
         })
       );
+      notify("Comment added successfully!");
     } catch {
       setError("Failed to add comment.");
     }
@@ -159,6 +172,11 @@ export const usePosts = () => {
     setCurrentPage(1);
   };
 
+  const updateSearchQuery = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  };
+
   return {
     posts: paginatedPosts,
     totalPosts,
@@ -170,5 +188,6 @@ export const usePosts = () => {
     addComment,
     changePage,
     changeLimit,
+    updateSearchQuery,
   };
 };
