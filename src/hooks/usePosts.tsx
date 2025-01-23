@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import mockPosts from "../mock/posts.json";
 
-interface Reply {
+export interface Reply {
   id: number;
   body: string;
   replies: Reply[];
 }
 
-interface Comment {
+export interface Comment {
   id: number;
   body: string;
   replies: Reply[];
