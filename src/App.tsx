@@ -1,4 +1,5 @@
 import CommunityPage from "./pages/CommunityPage";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (

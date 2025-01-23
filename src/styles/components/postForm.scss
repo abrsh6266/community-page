@@ -1,0 +1,49 @@
+.post-form-modal {
+  .MuiDialogTitle-root {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .MuiDialogContent-root {
+    padding: 20px;
+
+    .post-form {
+      margin-top: 10px;
+
+      .MuiTextField-root {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  .MuiDialogActions-root {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+
+    .MuiButton-root {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+
+    .MuiButton-contained {
+      background-color: #1976d2;
+      color: #fff;
+
+      &:hover {
+        background-color: #115293;
+      }
+    }
+
+    .MuiButton-outlined {
+      color: #555;
+      border-color: #ccc;
+
+      &:hover {
+        border-color: #888;
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+}

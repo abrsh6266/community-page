@@ -26,11 +26,11 @@ const CommunityPage: React.FC = () => {
     changePage,
   } = usePosts();
 
-  const [isAddingPost, setIsAddingPost] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddPost = (title: string, body: string) => {
     addPost(title, body);
-    setIsAddingPost(false);
+    setIsModalOpen(false);
   };
 
   return (
@@ -49,23 +49,23 @@ const CommunityPage: React.FC = () => {
       {error && <Typography color="error">{error}</Typography>}
       {loading && <Loading />}
 
-      {/* Post Form */}
-      {isAddingPost ? (
-        <PostForm
-          onSubmit={handleAddPost}
-          onCancel={() => setIsAddingPost(false)}
-        />
-      ) : (
-        <Box display="flex" justifyContent="end" marginY={3}>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={() => setIsAddingPost(true)}
-          >
-            Create New Post
-          </Button>
-        </Box>
-      )}
+      {/* Post Form Button */}
+      <Box display="flex" justifyContent="end" marginY={3}>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Create New Post
+        </Button>
+      </Box>
+
+      {/* Post Form Modal */}
+      <PostForm
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddPost}
+      />
 
       {/* Post List */}
       <Box className="post-list">
