@@ -3,6 +3,7 @@ import { Container, Typography, Box, Button, Pagination } from "@mui/material";
 import { usePosts, Post } from "../hooks/usePosts";
 import PostForm from "../components/Forms/PostForm";
 import PostCard from "../components/PostCard";
+import Loading from "../components/Loading";
 
 const CommunityPage: React.FC = () => {
   const {
@@ -32,7 +33,7 @@ const CommunityPage: React.FC = () => {
 
       {/* Error/Loading State */}
       {error && <Typography color="error">{error}</Typography>}
-      {loading && <Typography>Loading posts...</Typography>}
+      {loading && <Loading />}
 
       {/* Post Form */}
       {isAddingPost ? (
