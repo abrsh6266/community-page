@@ -1,4 +1,3 @@
-// src/pages/CommunityPage.tsx
 import React, { useState } from "react";
 import { Container, Typography, Box, Button, Pagination } from "@mui/material";
 import { usePosts, Post } from "../hooks/usePosts";
