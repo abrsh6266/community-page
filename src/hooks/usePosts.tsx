@@ -1,8 +1,6 @@
-import { useEffect, useMemo } from "react";
-import { usePostsState } from "./usePostsState";
-import { usePostsActions } from "./usePostsActions";
+import { useState, useEffect, useMemo } from "react";
 import mockPosts from "../mock/posts.json";
-import { filterPosts } from "../utils/filterUtils";
+import notify from "../components/notify";
 
 export interface Reply {
   id: number;
@@ -27,29 +25,14 @@ export interface Post {
 }
 
 export const usePosts = () => {
-  const {
-    posts,
-    setPosts,
-    currentPage,
-    setCurrentPage,
-    limit,
-    setLimit,
-    totalPosts,
-    setTotalPosts,
-    searchQuery,
-    setSearchQuery,
-    loading,
-    setLoading,
-    error,
-    setError,
-  } = usePostsState();
-
-  const { addPost, addComment } = usePostsActions(
-    posts,
-    setPosts,
-    setTotalPosts,
-    setError
-  );
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [paginatedPosts, setPaginatedPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -79,18 +62,104 @@ export const usePosts = () => {
       }
     };
     fetchPosts();
-  }, [setPosts, setError, setLoading, setTotalPosts]);
+  }, []);
 
-  const filteredPosts = useMemo(
-    () => filterPosts(posts, searchQuery),
-    [posts, searchQuery]
-  );
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery) return posts;
+    return posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.body.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [posts, searchQuery]);
 
-  const paginatedPosts = useMemo(() => {
+  useEffect(() => {
     const startIndex = (currentPage - 1) * limit;
     const endIndex = startIndex + limit;
-    return filteredPosts.slice(startIndex, endIndex);
+    setPaginatedPosts(filteredPosts.slice(startIndex, endIndex));
+    setTotalPosts(filteredPosts.length);
   }, [filteredPosts, currentPage, limit]);
+
+  const addReply = (
+    comments: Comment[],
+    commentId: number,
+    body: string
+  ): Comment[] => {
+    return comments.map((comment) => {
+      if (comment.id === commentId) {
+        return {
+          ...comment,
+          replies: [
+            ...comment.replies,
+            {
+              id: Date.now(),
+              body,
+              created_at: new Date().toISOString(),
+              replies: [],
+            },
+          ],
+        };
+      }
+      return {
+        ...comment,
+        replies: addReply(comment.replies, commentId, body),
+      };
+    });
+  };
+
+  const addPost = (title: string, body: string) => {
+    try {
+      const newPost: Post = {
+        id: posts.length + 1,
+        title,
+        body,
+        created_at: new Date().toISOString(),
+        comments: [],
+      };
+      const updatedPosts = [...posts, newPost];
+      setPosts(updatedPosts);
+      setTotalPosts(updatedPosts.length);
+    } catch {
+      setError("Failed to add post.");
+    }
+  };
+
+  const addComment = (
+    postId: number,
+    body: string,
+    parentCommentId?: number
+  ) => {
+    try {
+      setPosts(
+        posts.map((post) => {
+          if (post.id === postId) {
+            if (parentCommentId) {
+              return {
+                ...post,
+                comments: addReply(post.comments, parentCommentId, body),
+              };
+            }
+            return {
+              ...post,
+              comments: [
+                ...post.comments,
+                {
+                  id: Date.now(),
+                  body,
+                  created_at: new Date().toISOString(),
+                  replies: [],
+                },
+              ],
+            };
+          }
+          return post;
+        })
+      );
+      notify("Comment added successfully!");
+    } catch {
+      setError("Failed to add comment.");
+    }
+  };
 
   const changePage = (page: number) => {
     if (page > 0 && page <= Math.ceil(totalPosts / limit)) {
