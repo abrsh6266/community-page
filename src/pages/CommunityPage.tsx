@@ -13,6 +13,7 @@ import PostCard from "../components/PostCard";
 import Loading from "../components/Loading";
 import "../styles/globals.scss";
 import notify from "../components/notify";
+import SearchBar from "../components/SearchBar";
 
 const CommunityPage: React.FC = () => {
   const {
@@ -25,6 +26,7 @@ const CommunityPage: React.FC = () => {
     addPost,
     addComment,
     changePage,
+    updateSearchQuery,
   } = usePosts();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,6 +52,8 @@ const CommunityPage: React.FC = () => {
       {/* Error and Loading State */}
       {error && <Typography color="error">{error}</Typography>}
       {loading && <Loading />}
+
+      <SearchBar onChange={(query) => updateSearchQuery(query)} />
 
       {/* Post Form Button */}
       <div>
