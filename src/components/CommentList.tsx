@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { Comment } from "../hooks/usePosts";
 import CommentForm from "./Forms/CommentForm";
 import "../styles/components/comment.scss";
+import { getRelativeTime } from "../utilities/getRelativeTime";
 
 interface CommentListProps {
   comments: Comment[];
@@ -16,7 +17,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments, onAddReply }) => {
         <Box key={comment.id} className="comment-item">
           <Typography className="comment-body">{comment.body}</Typography>
           <Typography variant="caption" className="comment-created-at">
-            {new Date(comment.created_at).toLocaleString()}
+            {getRelativeTime(comment.created_at)}
           </Typography>
           <CommentForm onSubmit={(body) => onAddReply(body, comment.id)} />
           {comment.replies.length > 0 && (
